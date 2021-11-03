@@ -6,64 +6,84 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>910</width>
-    <height>846</height>
+    <width>1103</width>
+    <height>895</height>
    </rect>
   </property>
   <property name="windowTitle">
-   <string>Модель Солнечной системы</string>
+   <string>MainWindow</string>
   </property>
   <widget class="QWidget" name="centralwidget">
-   <widget class="QPushButton" name="down">
+   <widget class="QWidget" name="horizontalLayoutWidget">
     <property name="geometry">
      <rect>
-      <x>610</x>
-      <y>730</y>
-      <width>111</width>
-      <height>61</height>
+      <x>-10</x>
+      <y>780</y>
+      <width>1121</width>
+      <height>81</height>
      </rect>
     </property>
-    <property name="text">
-     <string>НАЗАД</string>
-    </property>
+    <layout class="QHBoxLayout" name="horizontalLayout">
+     <property name="spacing">
+      <number>28</number>
+     </property>
+     <property name="leftMargin">
+      <number>16</number>
+     </property>
+     <property name="rightMargin">
+      <number>16</number>
+     </property>
+     <item>
+      <widget class="QPushButton" name="reset">
+       <property name="text">
+        <string>СБРОС</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="stop">
+       <property name="text">
+        <string>СТОП</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="down">
+       <property name="text">
+        <string>НАЗАД</string>
+       </property>
+      </widget>
+     </item>
+     <item>
+      <widget class="QPushButton" name="up">
+       <property name="text">
+        <string>ВПЕРЁД</string>
+       </property>
+      </widget>
+     </item>
+    </layout>
    </widget>
-   <widget class="QPushButton" name="reset">
+   <widget class="QPushButton" name="earth">
     <property name="geometry">
      <rect>
-      <x>490</x>
-      <y>730</y>
-      <width>111</width>
-      <height>61</height>
+      <x>674</x>
+      <y>370</y>
+      <width>31</width>
+      <height>31</height>
      </rect>
     </property>
-    <property name="text">
-     <string>СБРОС</string>
-    </property>
-   </widget>
-   <widget class="QPushButton" name="up">
-    <property name="geometry">
-     <rect>
-      <x>730</x>
-      <y>730</y>
-      <width>111</width>
-      <height>61</height>
-     </rect>
+    <property name="styleSheet">
+     <string notr="true">border-radius: 15px; 
+background-color: rgb(0, 0, 255);</string>
     </property>
     <property name="text">
-     <string>ВПЕРЕД</string>
+     <string/>
     </property>
-   </widget>
-   <widget class="QPushButton" name="pushButton">
-    <property name="geometry">
-     <rect>
-      <x>90</x>
-      <y>90</y>
-      <width>651</width>
-      <height>501</height>
-     </rect>
-    </property>
-    <property name="text">
-     <string>PushButton</string>
+    <property name="iconSize">
+     <size>
+      <width>16</width>
+      <height>16</height>
+     </size>
     </property>
    </widget>
   </widget>
@@ -72,8 +92,8 @@
     <rect>
      <x>0</x>
      <y>0</y>
-     <width>910</width>
-     <height>22</height>
+     <width>1103</width>
+     <height>21</height>
     </rect>
    </property>
   </widget>
