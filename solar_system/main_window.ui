@@ -11,7 +11,10 @@
    </rect>
   </property>
   <property name="windowTitle">
-   <string>MainWindow</string>
+   <string>Модель Солнечной Системы</string>
+  </property>
+  <property name="styleSheet">
+   <string notr="true"/>
   </property>
   <widget class="QWidget" name="centralwidget">
    <widget class="QWidget" name="horizontalLayoutWidget">
@@ -34,28 +37,28 @@
       <number>16</number>
      </property>
      <item>
-      <widget class="QPushButton" name="reset">
+      <widget class="QPushButton" name="reset_button">
        <property name="text">
         <string>СБРОС</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="stop">
+      <widget class="QPushButton" name="stop_button">
        <property name="text">
         <string>СТОП</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="down">
+      <widget class="QPushButton" name="down_button">
        <property name="text">
         <string>НАЗАД</string>
        </property>
       </widget>
      </item>
      <item>
-      <widget class="QPushButton" name="up">
+      <widget class="QPushButton" name="up_button">
        <property name="text">
         <string>ВПЕРЁД</string>
        </property>
@@ -66,14 +69,14 @@
    <widget class="QPushButton" name="earth">
     <property name="geometry">
      <rect>
-      <x>674</x>
-      <y>370</y>
-      <width>31</width>
-      <height>31</height>
+      <x>677</x>
+      <y>387</y>
+      <width>26</width>
+      <height>26</height>
      </rect>
     </property>
     <property name="styleSheet">
-     <string notr="true">border-radius: 15px; 
+     <string notr="true">border-radius: 13px; 
 background-color: rgb(0, 0, 255);</string>
     </property>
     <property name="text">
@@ -86,16 +89,196 @@ background-color: rgb(0, 0, 255);</string>
      </size>
     </property>
    </widget>
-  </widget>
-  <widget class="QMenuBar" name="menubar">
-   <property name="geometry">
-    <rect>
-     <x>0</x>
-     <y>0</y>
-     <width>1103</width>
-     <height>21</height>
-    </rect>
-   </property>
+   <widget class="QPushButton" name="mercury">
+    <property name="geometry">
+     <rect>
+      <x>612</x>
+      <y>392</y>
+      <width>16</width>
+      <height>16</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius: 8px; 
+background-color: rgb(255, 55, 37);
+</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="venerus">
+    <property name="geometry">
+     <rect>
+      <x>645</x>
+      <y>390</y>
+      <width>20</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius: 10px; 
+background-color: rgb(255, 231, 97);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="mars">
+    <property name="geometry">
+     <rect>
+      <x>715</x>
+      <y>390</y>
+      <width>20</width>
+      <height>20</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius: 10px; 
+background-color: rgb(255, 12, 12);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>16</width>
+      <height>16</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="jupiter">
+    <property name="geometry">
+     <rect>
+      <x>743</x>
+      <y>383</y>
+      <width>34</width>
+      <height>34</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius: 17px; 
+background-color: rgb(170, 106, 2);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>16</width>
+      <height>16</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="saturn">
+    <property name="geometry">
+     <rect>
+      <x>779</x>
+      <y>384</y>
+      <width>32</width>
+      <height>32</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius: 16px; 
+background-color: rgb(255, 170, 0);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>16</width>
+      <height>16</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="uran">
+    <property name="geometry">
+     <rect>
+      <x>815</x>
+      <y>385</y>
+      <width>30</width>
+      <height>30</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius: 15px; 
+background-color: rgb(0, 170, 255);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>16</width>
+      <height>16</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="neptun">
+    <property name="geometry">
+     <rect>
+      <x>851</x>
+      <y>386</y>
+      <width>28</width>
+      <height>28</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius: 14px; 
+background-color: rgb(0, 85, 255);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>16</width>
+      <height>16</height>
+     </size>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="pluton">
+    <property name="geometry">
+     <rect>
+      <x>894</x>
+      <y>394</y>
+      <width>12</width>
+      <height>12</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius: 6px; 
+background-color: rgb(164, 170, 156);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+   </widget>
+   <widget class="QPushButton" name="sun">
+    <property name="geometry">
+     <rect>
+      <x>540</x>
+      <y>370</y>
+      <width>60</width>
+      <height>60</height>
+     </rect>
+    </property>
+    <property name="styleSheet">
+     <string notr="true">border-radius: 30px; 
+background-color: rgb(255, 255, 0);</string>
+    </property>
+    <property name="text">
+     <string/>
+    </property>
+    <property name="iconSize">
+     <size>
+      <width>16</width>
+      <height>16</height>
+     </size>
+    </property>
+   </widget>
   </widget>
   <widget class="QStatusBar" name="statusbar"/>
  </widget>
