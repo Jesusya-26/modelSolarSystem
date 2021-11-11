@@ -6,38 +6,41 @@
    <rect>
     <x>0</x>
     <y>0</y>
-    <width>1009</width>
-    <height>433</height>
+    <width>1664</width>
+    <height>757</height>
    </rect>
   </property>
   <property name="windowTitle">
    <string>Название космического объекта</string>
   </property>
-  <widget class="QLabel" name="label">
+  <widget class="QLabel" name="img">
    <property name="geometry">
     <rect>
      <x>40</x>
-     <y>50</y>
-     <width>341</width>
-     <height>341</height>
+     <y>150</y>
+     <width>461</width>
+     <height>451</height>
     </rect>
    </property>
    <property name="text">
     <string>TextLabel</string>
    </property>
+   <property name="alignment">
+    <set>Qt::AlignLeading|Qt::AlignLeft|Qt::AlignTop</set>
+   </property>
   </widget>
   <widget class="QWidget" name="verticalLayoutWidget">
    <property name="geometry">
     <rect>
-     <x>410</x>
+     <x>530</x>
      <y>20</y>
-     <width>571</width>
-     <height>401</height>
+     <width>1185</width>
+     <height>721</height>
     </rect>
    </property>
    <layout class="QVBoxLayout" name="verticalLayout">
     <property name="spacing">
-     <number>32</number>
+     <number>24</number>
     </property>
     <property name="topMargin">
      <number>0</number>
@@ -48,7 +51,7 @@
        <enum>Qt::LeftToRight</enum>
       </property>
       <property name="styleSheet">
-       <string notr="true">font: 63 48pt &quot;Bahnschrift SemiBold SemiConden&quot;;</string>
+       <string notr="true">font: 75 48pt &quot;Times New Roman&quot;;</string>
       </property>
       <property name="text">
        <string>НАЗВАНИЕ КОСМИЧЕСКОГО ОБЪЕКТА</string>
@@ -60,6 +63,9 @@
     </item>
     <item>
      <widget class="QLabel" name="description">
+      <property name="styleSheet">
+       <string notr="true">font: 12pt &quot;Times New Roman&quot;;</string>
+      </property>
       <property name="text">
        <string>Описание</string>
       </property>
