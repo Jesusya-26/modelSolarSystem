@@ -1,8 +1,8 @@
 import sys
 
-from solar_objects import SOLAR_OBJECTS, CLICKED_SOLAR_OBJECT
+from solar_objects import SOLAR_OBJECTS, CLICKED_SOLAR_OBJECT, START_POSITION
 
-from PyQt5.QtCore import QPropertyAnimation, QPointF
+from PyQt5.QtCore import QPropertyAnimation, Qt, QPointF
 from PyQt5.QtGui import QPixmap, QPainterPath, QPainter
 from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow
 from PyQt5 import uic
@@ -11,44 +11,40 @@ from solar_object_info import Ui_SolarObjectInfo
 
 
 class ModelSolarSystem(QMainWindow, Ui_MainWindow):
+
     def __init__(self):
         super().__init__()
         self.setupUi(self)
         self.initButtons()
-        self.initPaths()
+        self.initOrbits()
         self.initAnimations()
         self.repaint()
 
     def initButtons(self):
         global SOLAR_OBJECTS
+        global START_POSITION
         solar_views = [self.sun, self.mercury, self.venerus, self.earth, self.mars,
                        self.jupiter, self.saturn, self.uran, self.neptun, self.pluton]
         for i in range(len(SOLAR_OBJECTS)):
             SOLAR_OBJECTS[i].objName = solar_views[i].objectName()
             SOLAR_OBJECTS[i].view = solar_views[i]
             SOLAR_OBJECTS[i].view.clicked.connect(self.show_info)
+        for i in range(1, 10):
+            START_POSITION.append((solar_views[i].x(), solar_views[i].y()))
         self.up_button.clicked.connect(self.start)
         self.down_button.clicked.connect(self.start)
         self.stop_button.clicked.connect(self.stop)
         self.reset_button.clicked.connect(self.reset)
 
-    def initPaths(self):
-        self.paths, k, r = [], 0, 1
+    def initOrbits(self):
+        self.orbits = []
+        k, r = 0, 1
         for i in range(1, 10):
-            path = QPainterPath()
-            path.addEllipse(480 - k, 330 - k, int(r * 140), int(r * 140))
+            orbit = QPainterPath()
+            orbit.addEllipse(480 - k, 330 - k, int(r * 140), int(r * 140))
             k += 35
             r += 0.5
-            self.paths.append(path)
-
-
-    def paintEvent(self, event):
-        qp = QPainter()
-        qp.begin(self)
-        qp.setRenderHint(QPainter.Antialiasing)
-        for p in self.paths:
-            qp.drawPath(p)
-        qp.end()
+            self.orbits.append(orbit)
 
     def initAnimations(self):
         self.animations = []
@@ -57,20 +53,34 @@ class ModelSolarSystem(QMainWindow, Ui_MainWindow):
             anim.setDuration(10000 * (i + 1))
             values = [p / 100 for p in range(0, 101)]
             for j in values:
-                anim.setKeyValueAt(j, self.paths[i].pointAtPercent(j))
-            anim.setEndValue(QPointF(SOLAR_OBJECTS[i + 1].view.x(), SOLAR_OBJECTS[i].view.y()))
+                anim.setKeyValueAt(j, self.orbits[i].pointAtPercent(j))
+            anim.setLoopCount(10000)
             self.animations.append(anim)
+
+    def paintEvent(self, event):
+        qp = QPainter()
+        qp.begin(self)
+        for p in self.orbits:
+            qp.drawPath(p)
+        qp.end()
 
     def start(self):
         for a in self.animations:
+            if self.sender().objectName() == 'down_button':
+                a.setDirection(0)
+            else:
+                a.setDirection(1)
             a.start()
 
     def stop(self):
         for a in self.animations:
-            a.stop()
+            a.pause()
 
     def reset(self):
-        pass
+        for a in self.animations:
+             a.stop()
+        for i in range(9):
+            SOLAR_OBJECTS[i + 1].view.move(START_POSITION[i][0], START_POSITION[i][1])
 
     def show_info(self):
         global CLICKED_SOLAR_OBJECT
@@ -79,18 +89,21 @@ class ModelSolarSystem(QMainWindow, Ui_MainWindow):
             if i.objName == view:
                 CLICKED_SOLAR_OBJECT = i
                 break
-        self.space_object = SolarObjectInfo(self)
+        self.space_object = SolarObjectInfoWindow(self)
         self.space_object.show()
 
 
-class SolarObjectInfo(QWidget, Ui_SolarObjectInfo):
+class SolarObjectInfoWindow(QWidget, Ui_SolarObjectInfo):
     def __init__(self, *args):
         super().__init__()
         self.setupUi(self)
         self.setWindowTitle(CLICKED_SOLAR_OBJECT.name)
         self.solar_object_name.setText(CLICKED_SOLAR_OBJECT.name)
+        self.solar_object_name.resize(self.solar_object_name.sizeHint())
         self.main_info.setText(CLICKED_SOLAR_OBJECT.to_main_info())
+        self.main_info.resize(self.main_info.sizeHint())
         self.other_info.setText(CLICKED_SOLAR_OBJECT.to_other_info())
+        self.other_info.resize(self.other_info.sizeHint())
         pix = QPixmap(CLICKED_SOLAR_OBJECT.image)
         self.img.setPixmap(pix)
 

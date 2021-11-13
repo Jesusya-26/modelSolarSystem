@@ -1,14 +1,11 @@
 import sqlite3
 
-from PyQt5.QtCore import QPointF, pyqtProperty
-from PyQt5.QtWidgets import QPushButton
-
 DATA = sqlite3.connect('solar_objects_db.db').cursor().execute("""SELECT * FROM SolarObjects""")
 DATA = [list(i) for i in DATA]
 SOLAR_IMAGES = ['images/sun.png', 'images/mercury.png', 'images/venerus.png', 'images/earth.png',
                 'images/mars.png', 'images/jupiter.png', 'images/saturn.png', 'images/uran.png',
                 'images/neptun.png', 'images/pluton.png']
-SOLAR_OBJECTS, CLICKED_SOLAR_OBJECT = [], None
+SOLAR_OBJECTS, CLICKED_SOLAR_OBJECT, START_POSITION = [], None, []
 
 
 class SolarObject:
@@ -52,12 +49,6 @@ class SolarObject:
                     break
         atmosphere, description = '\n'.join(atmosphere), '\n'.join(description)
         return f'Состав атмосферы:\n{atmosphere}\n\nОписание:\n{description}'
-
-    def _set_pos(self, pos):
-
-        self.view.move(pos.x() - self.w / 2, pos.y() - self.h / 2)
-
-    pos = pyqtProperty(QPointF, fset=_set_pos)
 
 
 for i in range(10):
