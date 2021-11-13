@@ -2,16 +2,16 @@ import sys
 
 from solar_objects import SOLAR_OBJECTS, CLICKED_SOLAR_OBJECT, START_POSITION
 
-from PyQt5.QtCore import QPropertyAnimation, Qt, QPointF
+from PyQt5.QtCore import QPropertyAnimation
 from PyQt5.QtGui import QPixmap, QPainterPath, QPainter
 from PyQt5.QtWidgets import QApplication, QWidget, QMainWindow
-from PyQt5 import uic
 from main_window import Ui_MainWindow
 from solar_object_info import Ui_SolarObjectInfo
 
 
 class ModelSolarSystem(QMainWindow, Ui_MainWindow):
 
+    # загружаем все объекты в окне
     def __init__(self):
         super().__init__()
         self.setupUi(self)
@@ -20,6 +20,8 @@ class ModelSolarSystem(QMainWindow, Ui_MainWindow):
         self.initAnimations()
         self.repaint()
 
+    # привязываем все кнопки к методам, элементам класса SolarObject, сохраняем начальные позиции
+    # всех объектов Солнечной системы
     def initButtons(self):
         global SOLAR_OBJECTS
         global START_POSITION
@@ -29,13 +31,13 @@ class ModelSolarSystem(QMainWindow, Ui_MainWindow):
             SOLAR_OBJECTS[i].objName = solar_views[i].objectName()
             SOLAR_OBJECTS[i].view = solar_views[i]
             SOLAR_OBJECTS[i].view.clicked.connect(self.show_info)
-        for i in range(1, 10):
             START_POSITION.append((solar_views[i].x(), solar_views[i].y()))
         self.up_button.clicked.connect(self.start)
         self.down_button.clicked.connect(self.start)
         self.stop_button.clicked.connect(self.stop)
         self.reset_button.clicked.connect(self.reset)
 
+    # создаём орбиты для планет
     def initOrbits(self):
         self.orbits = []
         k, r = 0, 1
@@ -46,17 +48,20 @@ class ModelSolarSystem(QMainWindow, Ui_MainWindow):
             r += 0.5
             self.orbits.append(orbit)
 
+    # создаём анимации движения для каждой планеты
     def initAnimations(self):
         self.animations = []
         for i in range(9):
             anim = QPropertyAnimation(SOLAR_OBJECTS[i + 1].view, b'pos')
             anim.setDuration(10000 * (i + 1))
             values = [p / 100 for p in range(0, 101)]
+            # устанавливаем в процентном соотношении точки, которые нужно пройти во время анимации
             for j in values:
                 anim.setKeyValueAt(j, self.orbits[i].pointAtPercent(j))
             anim.setLoopCount(10000)
             self.animations.append(anim)
 
+    # рисуем орбиты для планет
     def paintEvent(self, event):
         qp = QPainter()
         qp.begin(self)
@@ -64,6 +69,7 @@ class ModelSolarSystem(QMainWindow, Ui_MainWindow):
             qp.drawPath(p)
         qp.end()
 
+    # начинаем анимацию
     def start(self):
         for a in self.animations:
             if self.sender().objectName() == 'down_button':
@@ -72,16 +78,19 @@ class ModelSolarSystem(QMainWindow, Ui_MainWindow):
                 a.setDirection(1)
             a.start()
 
+    # ставим анимацию на паузу
     def stop(self):
         for a in self.animations:
             a.pause()
 
+    # останавливаем анимацию и возвращаем планеты на изначальные позиции
     def reset(self):
         for a in self.animations:
              a.stop()
-        for i in range(9):
-            SOLAR_OBJECTS[i + 1].view.move(START_POSITION[i][0], START_POSITION[i][1])
+        for i in range(1, len(SOLAR_OBJECTS)):
+            SOLAR_OBJECTS[i].view.move(START_POSITION[i][0], START_POSITION[i][1])
 
+    # открываем окно с информацией об объекте Солнечной системы
     def show_info(self):
         global CLICKED_SOLAR_OBJECT
         view = self.sender().objectName()
@@ -99,11 +108,8 @@ class SolarObjectInfoWindow(QWidget, Ui_SolarObjectInfo):
         self.setupUi(self)
         self.setWindowTitle(CLICKED_SOLAR_OBJECT.name)
         self.solar_object_name.setText(CLICKED_SOLAR_OBJECT.name)
-        self.solar_object_name.resize(self.solar_object_name.sizeHint())
         self.main_info.setText(CLICKED_SOLAR_OBJECT.to_main_info())
-        self.main_info.resize(self.main_info.sizeHint())
         self.other_info.setText(CLICKED_SOLAR_OBJECT.to_other_info())
-        self.other_info.resize(self.other_info.sizeHint())
         pix = QPixmap(CLICKED_SOLAR_OBJECT.image)
         self.img.setPixmap(pix)
 
